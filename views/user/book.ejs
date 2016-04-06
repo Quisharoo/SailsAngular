@@ -1,0 +1,37 @@
+<a href="#/searchResult">Back to Search</a>
+<hr/>
+<div ng-repeat="w in bookResult.items | filter : book">
+        <div class="col-md-4">
+           <a ng-href ="#/book"><img class="img-responsive img-rounded" src = {{w.volumeInfo.imageLinks.thumbnail}}></a>
+            <h3>
+               {{w.volumeInfo.title}}
+            </h3>
+            <div class = "h4">
+                {{w.volumeInfo.description}}  
+            </div>
+            <div class = "h4">User Rating : {{w.volumeInfo.averageRating}}/5 
+            </div>     
+        </div>
+    </div>
+
+<div class="col-md-4">
+    <div class="h2">
+        More from {{publisher}}: 
+        </div>
+<div ng-repeat="p in publisherResult.items">
+    <a ng-href ="#/book"><img src ="{{p.volumeInfo.imageLinks.thumbnail}}" class="img-responsive img-rounded"></a>
+        {{p.volumeInfo.title}}
+        {{p.volumeInfo.language}}
+        {{p.volumeInfo.mainCategory}}
+</div>
+</div>
+    <div class="col-md-4">
+    <div class="h2">
+        More from {{author}}: 
+        </div>
+<div ng-repeat="a in authorResult.items">
+    <a ng-href ="#/book"><img src ="{{a.volumeInfo.imageLinks.thumbnail}}" class="img-responsive img-rounded"></a>
+        {{a.volumeInfo.title}}
+        {{a.volumeInfo.mainCategory}}
+</div>
+</div>

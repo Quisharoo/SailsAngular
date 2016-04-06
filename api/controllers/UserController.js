@@ -26,6 +26,9 @@ module.exports = {
   return res.view();
 
 },
+    'book' : function(req,res){
+        return res.view();
+    },
 	create: function (req, res, next){
 		//create a user with the parameters sent from
 		//the sign up form new.ejs

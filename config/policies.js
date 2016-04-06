@@ -35,6 +35,7 @@ module.exports.policies = {
     edit: "userCanSeeProfile",
     update: "userCanSeeProfile",
     search: "flash",
+    searchResult: "flash",    
     '*': "admin"
     }
 

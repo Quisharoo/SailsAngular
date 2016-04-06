@@ -1,7 +1,7 @@
 var myApp = angular.module('myApp', ['ngResource']);
 
 myApp.service('searchService', function () {
-    this.search="Harry Potter";
+    this.search = "Harry Potter";
 })
 
 myApp.service('bookService', function () {
@@ -10,29 +10,30 @@ myApp.service('bookService', function () {
 
 
 myApp.service('publisherService', function(){
-    this.publisher="";
+    this.publisher="Pottermore";
 })
 
 myApp.service('authorService', function(){
-    this.author="";
+    this.author="J.K. Rowling";
 })
 
 
 
 myApp.controller('mainController', ['$scope', '$resource', 'searchService', function ($scope, $resource, searchService) {
         $scope.search=searchService.search;
-        $scope.$watch('search', function(){
-            searchService.search=$scope.search;
-        })
+        $scope.$watch('search', function(newValue, oldValue){
+            searchService.search = $scope.search;
+            console.log("New Value: " + newValue);
+            console.log("Old Value: " + oldValue);
+        });
         
         
 }]);
 
 myApp.controller('secondController', ['$scope','$resource', 'searchService', 'bookService', 'publisherService', 'authorService', function($scope, $resource, searchService, bookService, publisherService, authorService){
 
-        $scope.search=searchService.search;
-    
-        $scope.bookAPI = 
+        $scope.search = searchService.search;
+        /*$scope.bookAPI = 
         $resource("https://www.googleapis.com/books/v1/volumes", {
                   APPID:'AIzaSyC1fxpjXnXORboqPAAYPMby9xqOXkt4xOE',
                   maxResults: 9,
@@ -98,6 +99,6 @@ myApp.controller('secondController', ['$scope','$resource', 'searchService', 'bo
                   langRestrict: 'en',    
                   callback: "JSON_CALLBACK",     
                   }, {get: {method : "JSONP"}});
-        $scope.authorResult = $scope.authorRequest.get({q: 'inauthor:' + $scope.author});    
+        $scope.authorResult = $scope.authorRequest.get({q: 'inauthor:' + $scope.author});    */
 }]);
 
