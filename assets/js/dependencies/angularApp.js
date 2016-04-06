@@ -1,7 +1,7 @@
-var myApp = angular.module('myApp', ['ngResource']);
+var myApp = angular.module('myApp', ['ngResource', 'ngCookies']);
 
 myApp.service('searchService', function () {
-    this.search = "Harry Potter";
+    this.search="";
 })
 
 myApp.service('bookService', function () {
@@ -10,30 +10,34 @@ myApp.service('bookService', function () {
 
 
 myApp.service('publisherService', function(){
-    this.publisher="Pottermore";
+    this.publisher="";
 })
 
 myApp.service('authorService', function(){
-    this.author="J.K. Rowling";
+    this.author="";
 })
 
 
 
-myApp.controller('mainController', ['$scope', '$resource', 'searchService', function ($scope, $resource, searchService) {
-        $scope.search=searchService.search;
+myApp.controller('mainController', ['$scope', '$resource','$window', 'searchService', function ($scope, $resource, $window, searchService) {
+        $scope.search = searchService.search;
         $scope.$watch('search', function(newValue, oldValue){
             searchService.search = $scope.search;
-            console.log("New Value: " + newValue);
-            console.log("Old Value: " + oldValue);
+            $window.sessionStorage["searchCheck"] = JSON.stringify($scope.search);
+            //storing input query in session
         });
+        
+        
         
         
 }]);
 
-myApp.controller('secondController', ['$scope','$resource', 'searchService', 'bookService', 'publisherService', 'authorService', function($scope, $resource, searchService, bookService, publisherService, authorService){
-
-        $scope.search = searchService.search;
-        /*$scope.bookAPI = 
+myApp.controller('secondController', ['$scope','$resource','$window', 'searchService', 'bookService', 'publisherService', 'authorService', function($scope, $resource, $window, searchService, bookService, publisherService, authorService){
+        
+    
+    
+        $scope.search = $window.sessionStorage["searchCheck"];
+        $scope.bookAPI = 
         $resource("https://www.googleapis.com/books/v1/volumes", {
                   APPID:'AIzaSyC1fxpjXnXORboqPAAYPMby9xqOXkt4xOE',
                   maxResults: 9,
@@ -46,17 +50,23 @@ myApp.controller('secondController', ['$scope','$resource', 'searchService', 'bo
     
     
         //storing unique book ID, and using watch services to update scope with changes
-        $scope.book=bookService.book;
-    
-        $scope.$watch('book', function(){
-                bookService.book=$scope.book;
-            })        
+        $scope.book = bookService.book;
+        $scope.$watch('book', function(newValue, oldValue){
+            bookService.book = $scope.book;
+            
+            //storing input query in session
+        }); 
         $scope.storeBook = function(bookID) {
-              $scope.book = bookID;                
-        };
+              $scope.book = bookID;
+              $window.sessionStorage["bookCheck"] = JSON.stringify($scope.book);
+              console.log($scope.book);    
+        };     
+        
+        $scope.book=$window.sessionStorage["bookCheck"];
+        
     
         //storing book publisher on button click, and using watch services to update scope with changes
-        $scope.publisher=publisherService.publisher;
+        /*$scope.publisher=publisherService.publisher;
         $scope.$watch('publisher', function(){
                 publisherService.publisher=$scope.publisher;
             }) 
@@ -66,7 +76,7 @@ myApp.controller('secondController', ['$scope','$resource', 'searchService', 'bo
             //console.log($scope.publisher);
         };
     
-        $scope.publisher=publisherService.publisher;
+        /*$scope.publisher=publisherService.publisher;
         $scope.publisherRequest = 
             $resource("https://www.googleapis.com/books/v1/volumes", {
             APPID:'AIzaSyCKioBwrgrzqIagT-06ugoMBdsuyiRi1_c',
@@ -99,6 +109,10 @@ myApp.controller('secondController', ['$scope','$resource', 'searchService', 'bo
                   langRestrict: 'en',    
                   callback: "JSON_CALLBACK",     
                   }, {get: {method : "JSONP"}});
-        $scope.authorResult = $scope.authorRequest.get({q: 'inauthor:' + $scope.author});    */
+        $scope.authorResult = $scope.authorRequest.get({q: 'inauthor:' + $scope.author});*/
+}]);
+
+myApp.controller('thirdController', ['$scope','$resource','$window', 'searchService', 'bookService', 'publisherService', 'authorService', function($scope, $resource, $window, searchService, bookService, publisherService, authorService){
+    
 }]);
 
