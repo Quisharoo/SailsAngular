@@ -3,17 +3,15 @@
 	<table class='table'>
 		<tr>
 			<th>Name</th>
-			<th>Title</th>
 			<th>Email</th>
+			<th>Role</th>
 			<th></th>
-			<th>Admin</th>
 			<th></th>
-			<th></th>
+            <th></th>
 		</tr>
 		<% _.each(users, function(user) { %>
 		<tr data-id="<%= user.id %>" data-model="user">
 			<td><%= user.name %></td>
-			<td><%= user.title %></td>
 			<td><%= user.email %></td>	
 	 			<% if (user.admin) { %>
  				<td> <img src="https://raw.githubusercontent.com/irlnathan/activityoverlord/318e08b1b88aba932952dd9125446065fbdfc160/assets/images/admin.png"></td>

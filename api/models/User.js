@@ -16,9 +16,6 @@ module.exports = {
 			required: true
 		},
 
-		title: {
-			type: 'string'
-		},
 		email: {
 			type: 'string',
 			email: true,

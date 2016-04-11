@@ -2,12 +2,8 @@
 <html ng-app="myApp">
   <head>
     <title>Bookmark</title>
-
-
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-
     <!--
         Stylesheets and Preprocessors
         ==============================
@@ -29,6 +25,7 @@
             + Use a different or additional preprocessor, like SASS, SCSS or Stylus
     -->
     <!--STYLES-->
+    <link rel="stylesheet" href="/styles/animate.css">
     <link rel="stylesheet" href="/styles/bootstrap.css">
     <link rel="stylesheet" href="/styles/custom.css">
     <link rel="stylesheet" href="/styles/customs.css">
@@ -46,14 +43,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Bookmark</a>
+         <a class="navbar-brand" href="/">Bookmark</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <% if (session.authenticated) { %>
               <li class="active"><a href="/user/show/<%= session.User.id %>"><%= session.User.name %> </a> </li>
               <li><a href="/user/search">Search</a></li>
-              <li><a href="#">Books</a></li>
+              <li><a href="/user/book">Books</a></li>
             <% } %>
             <% if (session.authenticated && session.User.admin) { %>
             <li><a href="/user">User Administration</a></li>
@@ -79,7 +76,6 @@
         </div>
       </div>
     </div>
-    
     <body data-spy="scroll" data-target="#menu-section" class="body">
     <%- body %>
   <!--
@@ -134,6 +130,7 @@
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/dependencies/angular.js"></script>
+    <script src="/js/dependencies/angularAnimate.js"></script>
     <script src="/js/dependencies/angularApp.js"></script>
     <script src="/js/dependencies/angularResource.js"></script>
     <script src="/js/dependencies/jquery.js"></script>

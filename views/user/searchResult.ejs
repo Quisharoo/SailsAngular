@@ -1,26 +1,30 @@
-<div ng-controller="secondController">
+<div ng-controller="secondController" ng-cloak>
 <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12" ng-cloak>
             <h1 class="page-header">
                 <small>Search results for {{search}}</small>           
             </h1>   
-            <a href="/user/search">Back to Search</a>
+            <a href="/user/search" class="btn button-custom btn-custom-two">Back to Search</a>
     </div>
 </div>
-    <div ng-repeat="w in bookResult.items">
+    <section id="work">
+    <div ng-repeat="w in bookResult.items" ng-cloak>    
          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 html">
+            <div class = "animated slideInUp">
             <div class="work-wrapper">
                 <a class="fancybox-media" title="Image Title Goes Here" href="/user/book">
-               <img 
+               <img ng-cloak
                     ng-click="storeBook(w.id); storePublisher(w.volumeInfo.publisher); storeAuthor(w.volumeInfo.authors[0]);" 
                     class="img-responsive img-rounded" 
                     src = {{w.volumeInfo.imageLinks.thumbnail}} 
                     alt="Image not available" style="width:200px;height:150px;">
                </a> 
-                <h4>
+                <h4 ng-cloak>
                 {{w.volumeInfo.title}}
                 </h4>          
             </div>         
         </div>
     </div>
+</div> 
+    </section>    
 </div>

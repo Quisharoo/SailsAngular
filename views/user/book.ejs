@@ -1,39 +1,39 @@
 <div ng-controller="secondController">
-<a href="#/searchResult">Back to Search</a>
-<hr/>
-<div ng-repeat="w in bookResult.items | filter : book">
-        <div class="col-md-4">
-           <a ng-href ="/user/searchResult"><img class="img-responsive img-rounded" src = {{w.volumeInfo.imageLinks.thumbnail}}></a>
-            <h3>
-               {{w.volumeInfo.title}}
-            </h3>
-            <div class = "h4">
-                {{w.volumeInfo.description}}  
+    <a href="/user/search" class="btn button-custom btn-custom-two" ng-cloak>Back to Search</a>
+    <br>
+    <br>
+    <div class = "animated fadeIn" ng-cloak ng-repeat="w in bookResult.items | filter : book">
+            <div class="col-md-4">
+               <a ng-href ="/user/searchResult"><img class="img-responsive img-rounded" src = {{w.volumeInfo.imageLinks.thumbnail}}></a>
+                <h3>
+                   {{w.volumeInfo.title}},
+                    {{w.volumeInfo.authors[0]}}
+                </h3>
+                <div class = "h4">
+                    {{w.volumeInfo.description}}  
+                </div>
+                <div class = "h4">User Rating : {{w.volumeInfo.averageRating}}/5 
+                </div>     
             </div>
-            <div class = "h4">User Rating : {{w.volumeInfo.averageRating}}/5 
-            </div>     
+        <div class="btn button-custom btn-custom-two" method="POST" action="/book/create">Save</div>
         </div>
+        <div class="col-md-4">
+        <div class="h2" >
+            More from {{publisher}}: 
+            </div>
+    <div class = "animated fadeIn" ng-repeat="p in publisherResult.items" ng-cloak >
+        <a ng-href ="#/book"><img src ="{{p.volumeInfo.imageLinks.thumbnail}}" class="img-responsive img-rounded"></a>
+            {{p.volumeInfo.title}}
+            {{p.volumeInfo.mainCategory}}
     </div>
-    
-    <div class="col-md-4">
-    <div class="h2">
-        More from {{publisher}}: 
         </div>
-<div ng-repeat="p in publisherResult.items">
-    <a ng-href ="#/book"><img src ="{{p.volumeInfo.imageLinks.thumbnail}}" class="img-responsive img-rounded"></a>
-        {{p.volumeInfo.title}}
-        {{p.volumeInfo.language}}
-        {{p.volumeInfo.mainCategory}}
-</div>
-</div>
-    
-    <div class="col-md-4">
-    <div class="h2">
-        More from {{author}}: 
+    <div class="col-md-4" ng-cloak>
+        <div class="h2">
+            More from {{author}}: 
         </div>
-<div ng-repeat="a in authorResult.items">
-    <a ng-href ="#/book"><img src ="{{a.volumeInfo.imageLinks.thumbnail}}" class="img-responsive img-rounded"></a>
-        {{a.volumeInfo.title}}
-</div>
-</div>
+            <div ng-repeat="a in authorResult.items" class = "animated fadeIn">
+                <a ng-href ="#/book"><img src ="{{a.volumeInfo.imageLinks.thumbnail}}" class="img-responsive img-rounded"></a>
+                    {{a.volumeInfo.title}}
+            </div>
+    </div>
 </div>
