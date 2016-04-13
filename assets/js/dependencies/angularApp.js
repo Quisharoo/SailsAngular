@@ -21,15 +21,11 @@ myApp.service('authorService', function(){
 
 myApp.controller('mainController', ['$scope', '$resource','$window', 'searchService', function ($scope, $resource, $window, searchService) {
         $scope.search = searchService.search;
-        $scope.$watch('search', function(newValue, oldValue){
+        $scope.$watch('search', function(){
             searchService.search = $scope.search;
             $window.sessionStorage["searchCheck"] = $scope.search;
-            //storing input query in session
         });
-        
-        
-        
-        
+                
 }]);
 
 myApp.controller('secondController', ['$scope','$resource','$window', 'searchService', 'bookService', 'publisherService', 'authorService', function($scope, $resource, $window, searchService, bookService, publisherService, authorService){
@@ -88,7 +84,7 @@ myApp.controller('secondController', ['$scope','$resource','$window', 'searchSer
                   callback: "JSON_CALLBACK",
                   }, {get: {method : "JSONP"}});
         $scope.publisherResult = $scope.publisherRequest.get({q: 'inpublisher:' + $scope.publisher});
-        console.log($scope.publisherResult);
+
     
     
         $scope.author = authorService.author;
@@ -103,6 +99,8 @@ myApp.controller('secondController', ['$scope','$resource','$window', 'searchSer
         
         $scope.author=$window.sessionStorage["authorCheck"];
     
+    
+    
         $scope.authorRequest = 
             $resource("https://www.googleapis.com/books/v1/volumes", {
             APPID:'AIzaSyC1fxpjXnXORboqPAAYPMby9xqOXkt4xOE',
@@ -112,8 +110,3 @@ myApp.controller('secondController', ['$scope','$resource','$window', 'searchSer
                   }, {get: {method : "JSONP"}});
         $scope.authorResult = $scope.authorRequest.get({q: 'inauthor:' + $scope.author});
 }]);
-
-myApp.controller('thirdController', ['$scope','$resource','$window', 'searchService', 'bookService', 'publisherService', 'authorService', function($scope, $resource, $window, searchService, bookService, publisherService, authorService){
-    
-}]);
-

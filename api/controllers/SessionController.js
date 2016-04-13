@@ -74,7 +74,7 @@ module.exports = {
 				}
 
 				//Redirect to their profile page (e.g. /views/user/show.ejs)
-				res.redirect('/user/search/');				
+				res.redirect('/user/show/'+user.id);				
 			});
 		});
 	},
