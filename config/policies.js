@@ -30,14 +30,16 @@ module.exports.policies = {
 
     user: {
     'new': "flash",
-    create: "flash",
-    show: "userCanSeeProfile",
-    edit: "userCanSeeProfile",
-    update: "userCanSeeProfile",
-    search: "flash",
-    searchResult: "flash", 
-    book: "flash",    
-    '*': "admin"
+    'create': "flash",
+    'show': "userCanSeeProfile",
+    'edit': "flash",
+    'update': "userCanSeeProfile",
+    'destroy': 'admin',
+    'index' : "admin",
+    'search': "sessionAuth",
+    'searchResult': "sessionAuth", 
+    'book': "sessionAuth"    
+    //'*': "admin"
     }
 
   // '*': true,

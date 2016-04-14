@@ -1,10 +1,4 @@
-$(document).ready(function(){
-
-	// Validate
-	// http://bassistance.de/jquery-plugins/jquery-plugin-validation/
-	// http://docs.jquery.com/Plugins/Validation/
- 	// http://docs.jquery.com/Plugins/Validation/validate#toptions
- 
+$(document).ready(function(){ 
  		$('.form-signin').validate({
  	    rules: {
  	      name: {
@@ -29,5 +23,5 @@ $(document).ready(function(){
  				.text('OK!').addClass('valid')
  			}
  	  });
- 
+    
  });
